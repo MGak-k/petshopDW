@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Views/Shared/Master.cshtml";
+    ViewBag.Title = "Product";
+}
+
+@section scripts{
+    <script src="~/app/product/product.js"></script>
+    <script>
+        $(document).ready(function () {
+            Product.init();
+         });
+    </script>
+}
+<div class="col-md-12" align="center">
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        Product
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+                <label>
+                    <span>Show Active:</span>
+                    <input data-switch="true" checked data-size="small" type="checkbox" id="show-active">
+                </label>
+
+            </div>
+        </div>
+
+        <div class="m-portlet__body">
+            <div style="padding: 10px;">
+                <div id="product">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,53 @@
+﻿@{
+    Layout = "~/Views/Shared/Master.cshtml";
+    ViewBag.Title = "Users";
+}
+
+@section css
+{
+
+
+}
+
+@section scripts{
+
+    <script src="~/app/users/users.js"></script>
+    <script>
+            $(document).ready(function () {
+                Users.init();
+             });
+    </script>
+}
+
+<div class="col-md-12" align="center">
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        &nbsp;&nbsp;<span class="editable" data-id="users">Users</span>
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+
+                <label>
+                    &nbsp;&nbsp;<span class="editable" data-id="show-inactive">Show Inactive:</span>
+                    <input data-switch="true" data-size="small" type="checkbox" id="show-active">
+                </label>
+
+            </div>
+        </div>
+
+        <div class="m-portlet__body">
+            <div style="padding: 10px;">
+                <div id="users">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
