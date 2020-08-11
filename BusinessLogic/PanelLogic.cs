@@ -511,6 +511,15 @@ namespace BusinessLogic
             return data;
 
         }
+
+        public List<DAL.Product> GetAllProducts()
+        {
+            var data = DB.Products
+                  .OrderByDescending(x => x.ProductName)
+                  .ToList();
+
+            return data;
+        }
         public void CreateProduct(DAL.Product postData)
         {
             var product = new DAL.Product();

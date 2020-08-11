@@ -9,11 +9,17 @@ namespace PetShopDW.Controllers
     public class HomeController : BaseController
     {
         //[Authorize(Roles = "Admin,User")]
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
-            return View();
-        }
 
+          var model = BLL.GetAllProducts();
+            if (search != null)
+                model = model.Where(x => x.ProductName.ToLower().Contains(search.ToLower()) || x.Description.ToLower().Contains(search.ToLower())).ToList();
+
+
+            return View(model);
+        }
+       
         public ActionResult AddToCart(Guid ProductID)
         {
 
@@ -29,6 +35,7 @@ namespace PetShopDW.Controllers
 
                 });
                 Session["cart"] = cart;
+                Session["count"] = 1;
             }
             else
             {
@@ -41,9 +48,11 @@ namespace PetShopDW.Controllers
 
                 });
                 Session["cart"] = cart;
+                Session["count"] = cart.Count();
+
 
             }
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         public ActionResult MyCart()

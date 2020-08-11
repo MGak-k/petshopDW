@@ -214,12 +214,21 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\card-js.min.css" />
+    <Content Include="assets\card-js.min.js" />
     <Content Include="app\category\category.js" />
     <Content Include="app\helpers\app.grid.js" />
     <Content Include="app\helpers\app.helpers.js" />
     <Content Include="app\product\product.js" />
     <Content Include="app\users\users.edit.js" />
     <Content Include="app\users\users.js" />
+    <Content Include="assets\ccv\css\demo.css" />
+    <Content Include="assets\ccv\css\styles.css" />
+    <Content Include="assets\ccv\images\amex.jpg" />
+    <Content Include="assets\ccv\images\mastercard.jpg" />
+    <Content Include="assets\ccv\images\visa.jpg" />
+    <Content Include="assets\ccv\js\jquery.payform.min.js" />
+    <Content Include="assets\ccv\js\script.js" />
     <Content Include="assets\img\petshop.jpg" />
     <Content Include="assets\product\product.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -334,6 +343,8 @@
     <Content Include="DX\layouts\Split\SplitLayout.html" />
     <Content Include="DX\layouts\Split\SplitLayout.js" />
     <Content Include="favicon.ico" />
+    <Content Include="filedump\users\141907e6-c97e-4cd0-8886-903bb44d784e.png" />
+    <Content Include="filedump\users\141907e6-c97e-4cd0-8886-903bb44d784e_thumbnail.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -583,6 +594,8 @@
     <Content Include="DX\css\icons\dxicons.woff" />
     <Content Include="DX\css\icons\dxiconsios.ttf" />
     <Content Include="DX\css\icons\dxiconsios.woff" />
+    <None Include="Properties\PublishProfiles\PetShopDW - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\PetShopDW - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -642,6 +655,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="filedump\product\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
