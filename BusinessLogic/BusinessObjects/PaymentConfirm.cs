@@ -17,5 +17,6 @@ namespace BusinessLogic.BusinessObjects
         public Nullable<decimal> PaidAmount { get; set; }
         public string PaymentType { get; set; }
 
+        public List<BusinessObjects.CartItems> CartItems { get; set; }
     }
 }

@@ -45,6 +45,18 @@ namespace PetShopDW.Controllers
             return RedirectToAction("Index","Home");
         }
 
+        public ActionResult RemoveFromCart(Guid ProductID)
+        {
+            if (Session["cart"] != null)
+            {
+                var cart = (List<BusinessLogic.BusinessObjects.CartItems>)Session["cart"];
+                cart.Remove(cart.Where(x => x.Product.ProductID == ProductID).FirstOrDefault());
+                Session["cart"] = cart;
+            }
+           
+            return RedirectToAction("MyCart", "Payment");
+        }
+
         public ActionResult MyCart()
         {
             var milos = Session["cart"];
@@ -56,8 +68,8 @@ namespace PetShopDW.Controllers
         {
             try
             {
-                var orderItems = Session["cart"];
-                //BLL.AddPayment(postData,orderItems);
+                var orderItems = (List<BusinessLogic.BusinessObjects.CartItems>)Session["cart"];
+                BLL.AddPayment(postData,orderItems);
                 return Json(new { success = true });
             }
             catch (Exception ex)

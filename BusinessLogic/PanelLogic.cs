@@ -10,11 +10,11 @@ namespace BusinessLogic
 {
    public class PanelLogic : IDisposable
     {
-        protected DAL.praksaPSEntities DB;
+        protected DAL.petshopPraksaDWEntities DB;
         protected DAL.User CurrentUser;
         public PanelLogic()
         {
-            DB = new DAL.praksaPSEntities();
+            DB = new DAL.petshopPraksaDWEntities();
         }
 
         public void Dispose()
@@ -568,25 +568,36 @@ namespace BusinessLogic
 
         #region Payment
 
-        //public void AddPayment(BusinessObjects.PaymentConfirm postData, List<BusinessLogic.BusinessObjects.CartItems> cartItems)
-        //{
-           
+        public void AddPayment(BusinessObjects.PaymentConfirm postData, List<BusinessLogic.BusinessObjects.CartItems> cartItems)
+        {
+            var payment = new DAL.DeliveryDetail();
+            if (payment != null)
+            {
+                payment.DeliveryDetailsID = Guid.NewGuid();
+                payment.Address = postData.Address;
+                payment.City = postData.City;
+                payment.Country = postData.Country;
+                payment.OrderID = Guid.NewGuid();
+                payment.PaymentType = "Credit Card";
+                payment.PaidAmount = postData.PaidAmount;
 
-        //    var payment = new DAL.DeliveryDetail();
-        //    if (payment != null)
-        //    {
-        //        payment.DeliveryDetailsID = Guid.NewGuid();
-        //        payment.MemberID = Guid.NewGuid();
-        //        payment.Address = postData.Address;
-        //        payment.City = postData.City;
-        //        payment.Country = postData.Country;
-        //        payment.OrderID = Guid.NewGuid();
-        //        payment.PaymentType = "Credit Card";
+               
+                DB.DeliveryDetails.Add(payment);
+                DB.SaveChanges();
+            }
 
-        //        DB.DeliveryDetails.Add(payment);
-        //        DB.SaveChanges();
-        //    }
-        //}
+            foreach (var i in cartItems)
+            {
+                var item = new DAL.PaymentItem();
+                item.ID = Guid.NewGuid();
+                item.ProductID = i.Product.ProductID;
+                item.PaymentID = payment.DeliveryDetailsID;
+
+                DB.PaymentItems.Add(item);
+                DB.SaveChanges();
+            }
+
+        }
         #endregion
 
 
