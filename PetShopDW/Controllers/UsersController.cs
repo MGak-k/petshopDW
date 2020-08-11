@@ -150,22 +150,7 @@ namespace PetShopDW.Controllers
                 return Json(ex.Message);
             }
         }
-        [Authorize(Roles = "Admin,Userapprove")]
-        public JsonResult GetUserGroups()
-        {
-            try
-            {
-                var model = BLL.GetUserGroupsDropdowns();
-                return Json(new { Response = "OK", data = model }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                Logger.Module = "UsersController";
-                Logger.Exception(ex);
-                return Json(ex.Message);
-            }
-        }
-
+       
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public JsonResult DeleteUser(Guid UserID)

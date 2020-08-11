@@ -12,11 +12,13 @@ namespace BusinessLogic.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class UserGroup
+    public partial class AspNetUserClaim
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public bool Active { get; set; }
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
+    
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

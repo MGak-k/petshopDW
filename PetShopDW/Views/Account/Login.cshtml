@@ -38,6 +38,7 @@
 </head>
 <!-- end::Head -->
 <!-- end::Body -->
+
 <body class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
     <!-- begin:: Page -->
     <div class="m-grid m-grid--hor m-grid--root m-page">
@@ -91,7 +92,7 @@
                               <form class="m-login__form m-form" action="">
 
                                   <div class="form-group m-form__group">
-                                      <input class="form-control m-input" type="text" placeholder="User Name" name="username" autocomplete="off">
+                                      <input class="form-control m-input" type="text" placeholder="Email" name="email" autocomplete="off">
                                   </div>
                                   <div class="form-group m-form__group">
                                       <input class="form-control m-input m-login__form-input--last" type="Password" placeholder="Password" name="password">
@@ -149,15 +150,6 @@
                             @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                         <form class="m-login__form m-form" action="">
 
-                            <div class="form-group m-form__group">
-                                <input class="form-control m-input" type="text" placeholder="First Name" value="@if (ViewBag.Model != null)
-                                    {<text>@ViewBag.Model.FirstName</text>}" name="firstname">
-                            </div>
-
-                            <div class="form-group m-form__group">
-                                <input class="form-control m-input" type="text" placeholder="Last Name" value="@if (ViewBag.Model != null)
-                                    {<text>@ViewBag.Model.LastName</text>}" name="lastname">
-                            </div>
                             <div class="form-group m-form__group">
                                 <input class="form-control m-input" type="text" placeholder="Email" value="@if (ViewBag.Model != null)
                                     {<text>@ViewBag.Model.Email</text>}" name="email" autocomplete="off">

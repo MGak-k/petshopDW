@@ -12,11 +12,12 @@ namespace BusinessLogic.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class UserGroup
+    public partial class PaymentItem
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public bool Active { get; set; }
+        public System.Guid ID { get; set; }
+        public Nullable<System.Guid> ProductID { get; set; }
+        public Nullable<System.Guid> PaymentID { get; set; }
+    
+        public virtual DeliveryDetail DeliveryDetail { get; set; }
     }
 }

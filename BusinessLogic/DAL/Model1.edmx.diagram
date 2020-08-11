@@ -4,26 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0f2ef72291ff4be883718b1236430752" Name="Diagram1">
-        <EntityTypeShape EntityType="praksaPSModel.Cart" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="praksaPSModel.Category" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="praksaPSModel.DeliveryDetail" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="praksaPSModel.Image" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="praksaPSModel.MemberRole" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="praksaPSModel.Member" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="praksaPSModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="praksaPSModel.Role" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="praksaPSModel.ShopingCartStatu" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
-        <AssociationConnector Association="praksaPSModel.FK__Cart__ProductID__46E78A0C" ManuallyRouted="false" />
-        <AssociationConnector Association="praksaPSModel.FK__Product__Categor__3B75D760" ManuallyRouted="false" />
-        <AssociationConnector Association="praksaPSModel.FK__DeliveryD__Membe__4222D4EF" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="praksaPSModel.User" Width="1.5" PointX="8.375" PointY="6.75" />
-        <EntityTypeShape EntityType="praksaPSModel.Setting" Width="1.5" PointX="0.75" PointY="9.75" />
-        <EntityTypeShape EntityType="praksaPSModel.EmailTemplate" Width="1.5" PointX="10.375" PointY="0.75" />
-        <EntityTypeShape EntityType="praksaPSModel.EmailAttachment" Width="1.5" PointX="12.625" PointY="4.5" />
-        <EntityTypeShape EntityType="praksaPSModel.EmailQueue" Width="1.5" PointX="10.375" PointY="4" />
-        <AssociationConnector Association="praksaPSModel.FK_EmailAttachment_EmailAttachment" />
-        <EntityTypeShape EntityType="praksaPSModel.UserGroup" Width="1.5" PointX="3.375" PointY="10.75" />
+      <Diagram DiagramId="3c4382fb37b54956852206a474b39ce2" Name="Diagram1">
+        <EntityTypeShape EntityType="petshopPraksaDWModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.Cart" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.Category" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.DeliveryDetail" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.EmailAttachment" Width="1.5" PointX="10" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.EmailQueue" Width="1.5" PointX="7.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.EmailTemplate" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.Image" Width="1.5" PointX="5.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.PaymentItem" Width="1.5" PointX="10" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.Product" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.Role" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.Setting" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.ShopingCartStatu" Width="1.5" PointX="11.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.User" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="petshopPraksaDWModel.UserGroup" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="petshopPraksaDWModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="petshopPraksaDWModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="petshopPraksaDWModel.FK__Cart__ProductID__07C12930" ManuallyRouted="false" />
+        <AssociationConnector Association="petshopPraksaDWModel.FK__Product__Categor__0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="petshopPraksaDWModel.FK_PaymentItem_DeliveryDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="petshopPraksaDWModel.FK_EmailAttachment_EmailAttachment" ManuallyRouted="false" />
+        <AssociationConnector Association="petshopPraksaDWModel.AspNetUserRoles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

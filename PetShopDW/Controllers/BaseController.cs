@@ -22,7 +22,7 @@ namespace PetShopDW.Controllers
         protected override void Dispose(bool disposing)
         {
             if (BLL != null)
-                //BLL.Dispose();
+                BLL.Dispose();
 
             base.Dispose(disposing);
         }

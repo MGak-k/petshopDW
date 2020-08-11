@@ -23,7 +23,7 @@ namespace PetShopDW.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -35,9 +35,9 @@ namespace PetShopDW.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -75,88 +75,25 @@ namespace PetShopDW.Controllers
                 return View(model);
             }
             ViewBag.IsRegister = false;
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-
-            var appUser = BLL.GetUserByAccount(model.UserName);
-
-            if (appUser != null)
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            switch (result)
             {
-                var result = await SignInManager.PasswordSignInAsync(appUser.UserName, model.Password, model.RememberMe, shouldLockout: false);
-
-                var aspNetUser = UserManager.FindByName(appUser.UserName);
-                if (model.Password == "njasdhjad")
-                {
-                    await SignInManager.SignInAsync(aspNetUser, true, true);
-                    result = SignInStatus.Success;
-                }
-                switch (result)
-                {
-                    case SignInStatus.Success:
-                        {
-                            return View(model);
-
-                        }
-                    case SignInStatus.LockedOut:
-                        return View("Lockout");
-                    case SignInStatus.RequiresVerification:
-                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                    case SignInStatus.Failure:
-                    default:
-                        ModelState.AddModelError("", "Invalid login attempt.");
-                        return View(model);
-                }
-            }
-            else
-            {
-                ModelState.AddModelError("", "You are still not registered!");
-                return View(model);
+                case SignInStatus.Success:
+                    return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(model);
             }
         }
 
-        public JsonResult AddUserToRole(BusinessLogic.BusinessObjects.Users PostData)
-        {
-            try
-            {
-
-                var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
-                var appUser = BLL.GetUserProfileById(PostData.ID);
-                var aspNetUser = UserManager.FindByName(appUser.UserName);
-                var oldUserRoles = UserManager.GetRoles(aspNetUser.Id).ToList();
-                foreach (var item in oldUserRoles)
-                {
-                    var oldRoleName = item;
-                    UserManager.RemoveFromRole(aspNetUser.Id, oldRoleName);
-                }
-                if (PostData.UserGroupID != null)
-                {
-                    var roleNames = BLL.GetRoleNamesByID(PostData.UserGroupID);
-                    foreach (var item in roleNames)
-                    {
-                        var roleName = item.Name;
-
-                        if (!roleManager.RoleExists(roleName))
-                        {
-                            var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                            role.Name = roleName;
-                            roleManager.Create(role);
-                        }
-
-                        UserManager.AddToRole(aspNetUser.Id, roleName);
-                    }
-
-                    //BLL.SaveUserGroup(PostData, PostData.EditUserID, currentLocation, offsetMinutes);
-                    return Json(new { Response = "OK" });
-                }
-                else
-                    //Bll.RemoveUserGroup(PostData.EditUserID, currentLocation.ID);
-                return Json(new { Response = "OK" });
-            }
-            catch (Exception ex)
-            {
-                return Json(new { Response = "Error", Result = ex.Message });
-            }
-        }
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -186,7 +123,7 @@ namespace PetShopDW.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -208,8 +145,8 @@ namespace PetShopDW.Controllers
             return View();
         }
 
-
-        //POST: /Account/Register
+        //
+        // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -217,48 +154,26 @@ namespace PetShopDW.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.UserName == null)
-                    model.UserName = System.IO.Path.GetFileNameWithoutExtension(System.IO.Path.GetRandomFileName());
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                
-                    var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
-                    var result = await UserManager.CreateAsync(user, model.Password);
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    if (result.Succeeded)
-                    {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                        BLL.AddToUserTable(model.FirstName, model.LastName, model.UserName, model.Email, true);
-                        BusinessLogic.PanelLogic.SendRegisterEmail(model.UserName, model.Dateoffset);
-                        // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
-                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                        // return RedirectToAction("Index", "Home");
-                        TempData["success"] = "Successful registered. Please Check your email!";
-                        return Redirect("/Account/Login/");
-                    }
-
-                    AddErrors(result);
-                    ViewBag.ErrorMessage = result.Errors;
-                    ViewBag.IsRegister = true;
-                    ViewBag.Model = model;
-                    return View("Login");
-
+                    return RedirectToAction("Index", "Home");
                 }
-            else
-            {
-                ViewBag.ErrorMessage = ModelState.Values.SelectMany(v => v.Errors);
-                ViewBag.IsRegister = true;
-                ViewBag.Model = model;
-                return View("Login");
-
+                AddErrors(result);
             }
 
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
-
 
         //
         // GET: /Account/ConfirmEmail
@@ -290,7 +205,7 @@ namespace PetShopDW.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.UserName);
+                var user = await UserManager.FindByNameAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
@@ -336,7 +251,7 @@ namespace PetShopDW.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.UserName);
+            var user = await UserManager.FindByNameAsync(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
@@ -437,43 +352,43 @@ namespace PetShopDW.Controllers
 
         //
         // POST: /Account/ExternalLoginConfirmation
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
-        //{
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        return RedirectToAction("Index", "Manage");
-        //    }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Manage");
+            }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        // Get the information about the user from the external login provider
-        //        var info = await AuthenticationManager.GetExternalLoginInfoAsync();
-        //        if (info == null)
-        //        {
-        //            return View("ExternalLoginFailure");
-        //        }
-        //        var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-        //        var result = await UserManager.CreateAsync(user);
-        //        if (result.Succeeded)
-        //        {
-        //            result = await UserManager.AddLoginAsync(user.Id, info.Login);
-        //            if (result.Succeeded)
-        //            {
-        //                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-        //                return RedirectToLocal(returnUrl);
-        //            }
-        //        }
-        //        AddErrors(result);
-        //    }
+            if (ModelState.IsValid)
+            {
+                // Get the information about the user from the external login provider
+                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+                if (info == null)
+                {
+                    return View("ExternalLoginFailure");
+                }
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user);
+                if (result.Succeeded)
+                {
+                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    if (result.Succeeded)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        return RedirectToLocal(returnUrl);
+                    }
+                }
+                AddErrors(result);
+            }
 
-        //    ViewBag.ReturnUrl = returnUrl;
-        //    return View(model);
-        //}
+            ViewBag.ReturnUrl = returnUrl;
+            return View(model);
+        }
 
-        ////
+        //
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -535,7 +450,7 @@ namespace PetShopDW.Controllers
         {
             if (Url.IsLocalUrl(returnUrl))
             {
-                return Redirect(returnUrl);
+                return RedirectToAction("Index", "Home");
             }
             return RedirectToAction("Index", "Home");
         }

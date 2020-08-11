@@ -566,6 +566,29 @@ namespace BusinessLogic
 
         #endregion
 
+        #region Payment
+
+        //public void AddPayment(BusinessObjects.PaymentConfirm postData, List<BusinessLogic.BusinessObjects.CartItems> cartItems)
+        //{
+           
+
+        //    var payment = new DAL.DeliveryDetail();
+        //    if (payment != null)
+        //    {
+        //        payment.DeliveryDetailsID = Guid.NewGuid();
+        //        payment.MemberID = Guid.NewGuid();
+        //        payment.Address = postData.Address;
+        //        payment.City = postData.City;
+        //        payment.Country = postData.Country;
+        //        payment.OrderID = Guid.NewGuid();
+        //        payment.PaymentType = "Credit Card";
+
+        //        DB.DeliveryDetails.Add(payment);
+        //        DB.SaveChanges();
+        //    }
+        //}
+        #endregion
+
 
 
     }
