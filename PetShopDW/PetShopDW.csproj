@@ -200,6 +200,7 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -215,6 +216,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\orders\orders.js" />
     <Content Include="assets\card-js.min.css" />
     <Content Include="assets\card-js.min.js" />
     <Content Include="app\category\category.js" />
@@ -653,6 +655,9 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Upload.cshtml" />
     <Content Include="Views\Payment\MyCart.cshtml" />
+    <Content Include="Views\Product\AddEdit.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<BusinessLogic.DAL.DeliveryDetail>
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaidAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsSent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaymentItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaidAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaymentType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsSent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DeliveryDetailsID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DeliveryDetailsID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DeliveryDetailsID })
+        </td>
+    </tr>
+}
+
+</table>

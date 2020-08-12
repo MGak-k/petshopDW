@@ -600,6 +600,29 @@ namespace BusinessLogic
         }
         #endregion
 
+        #region Orders
+
+        public List<BusinessLogic.BusinessObjects.DeliveryDetails> GetOrders()
+        {
+            var data = DB.DeliveryDetails
+                   .OrderByDescending(x => x.OrderDate)
+                   .Select(z => new BusinessObjects.DeliveryDetails()
+                   {
+                       OrderDate = z.OrderDate,
+                       Address = z.Address,
+                       City = z.City,
+                       Country = z.Country,
+                       DeliveryDetailsID = z.DeliveryDetailsID,
+                       IsSent = z.IsSent,
+                       OrderID =z.OrderID,
+                       PaidAmount = z.PaidAmount,
+                   }).ToList();
+
+            return data;
+        }
+
+        #endregion
+
 
 
     }

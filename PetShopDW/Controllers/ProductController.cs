@@ -14,6 +14,11 @@ namespace PetShopDW.Controllers
             return View();
         }
 
+        public ActionResult AddEdit()
+        {
+            return View();
+        }
+
         [HttpPost]
         public JsonResult Get(int skip, int take, string filter, string sort, bool showActive)
         {

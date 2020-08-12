@@ -82,6 +82,8 @@ namespace PetShopDW.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                   var a = User.Identity.IsAuthenticated;
+                    var b = User.IsInRole("Admin");
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -159,7 +161,9 @@ namespace PetShopDW.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
+                    var userr = User.Identity.IsAuthenticated;
+                     UserManager.AddToRole(user.Id, "Admin");
+                    User.IsInRole("Admin");
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

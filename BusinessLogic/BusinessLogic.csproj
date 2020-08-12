@@ -78,6 +78,7 @@
     <Compile Include="BusinessObjects\BaseModelForFiltering.cs" />
     <Compile Include="BusinessObjects\CartItems.cs" />
     <Compile Include="BusinessObjects\Category.cs" />
+    <Compile Include="BusinessObjects\DeliveryDetails.cs" />
     <Compile Include="BusinessObjects\Email\EmailAttachment.cs" />
     <Compile Include="BusinessObjects\Generic.cs" />
     <Compile Include="BusinessObjects\GenericDropdown.cs" />

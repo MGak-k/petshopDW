@@ -57,6 +57,17 @@ namespace PetShopDW.Controllers
             return RedirectToAction("MyCart", "Payment");
         }
 
+        [HttpPost]
+        public ActionResult ClearCart()
+        {
+            if (Session["cart"] != null)
+            {
+                Session["cart"] = null;
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
         public ActionResult MyCart()
         {
             var milos = Session["cart"];

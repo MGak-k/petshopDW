@@ -28,6 +28,8 @@ namespace BusinessLogic.DAL
         public Nullable<System.Guid> OrderID { get; set; }
         public Nullable<decimal> PaidAmount { get; set; }
         public string PaymentType { get; set; }
+        public Nullable<bool> IsSent { get; set; }
+        public Nullable<System.DateTime> OrderDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaymentItem> PaymentItems { get; set; }

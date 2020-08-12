@@ -1,0 +1,27 @@
+﻿@model List<BusinessLogic.BusinessObjects.DeliveryDetails>
+
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Views/Shared/Master.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-sm">
+                <span class="list-group-item active" style="text-align:center;font-weight:bold;"><strong>Order Details</strong></span>
+                <span class="list-group-item">Order Date : @item.OrderDate</span>
+                <span class="list-group-item">Coutry: @item.Country</span>
+                <span class="list-group-item">City: @item.City</span>
+                <span class="list-group-item">Address: @item.Address</span>
+                <span class="list-group-item">Paid Amount: @item.PaidAmount</span>
+                <span class="list-group-item">Is Sent: @item.IsSent</span>
+            </div>
+
+        }
+    </div>
+
+</div>
