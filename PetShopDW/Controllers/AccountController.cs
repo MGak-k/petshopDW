@@ -82,8 +82,6 @@ namespace PetShopDW.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                   var a = User.Identity.IsAuthenticated;
-                    var b = User.IsInRole("Admin");
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

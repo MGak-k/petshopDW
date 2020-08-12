@@ -37,13 +37,11 @@ namespace PetShopDW.Controllers
                 _userManager = value;
             }
         }
-        //[Authorize(Roles = "Admin,User,Entry")]
         public ActionResult Index()
         {
             return View();
         }
 
-        //[Authorize(Roles = "Admin,User,Entry")]
         [HttpPost]
         public JsonResult Get(int skip, int take, string filter, string sort, bool showInactive)
         {
@@ -69,7 +67,6 @@ namespace PetShopDW.Controllers
             }
         }
 
-        //[Authorize(Roles = "Admin,User,Entry")]
         public ActionResult Edit(Guid id)
         {
             try
@@ -86,8 +83,6 @@ namespace PetShopDW.Controllers
             }
         }
 
-
-        //[Authorize(Roles = "Admin,User,Entry")]
         public JsonResult Upload(Guid Id)
         {
             try
@@ -118,7 +113,6 @@ namespace PetShopDW.Controllers
                         resizedImgPhoto.Dispose();
                         imgPhoto.Dispose();
 
-                        //BLL.UpdateLocationPhoto(Id);
                         System.IO.File.Delete(fullpath);
                     }
                 }

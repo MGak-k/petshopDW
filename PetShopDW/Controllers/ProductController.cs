@@ -36,7 +36,6 @@ namespace PetShopDW.Controllers
             }
             catch (Exception ex)
             {
-                // Logger.ShowErrors(ex, "VehicleVehicles", User.Identity.Name, null, Request.UserHostAddress, null, null);
                 return Json(new { success = false });
             }
         }

@@ -49,7 +49,7 @@ namespace PetShopDW.Controllers
 
         public Boolean IsUserAdmin()
         {
-            return User.IsInRole("Admin") || User.IsInRole("company");
+            return User.IsInRole("Admin");
         }
 
         public string ShowErrors(Exception ex)
