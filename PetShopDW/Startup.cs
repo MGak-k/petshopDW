@@ -14,6 +14,10 @@ namespace PetShopDW
         {
             ConfigureAuth(app);
 
+            GlobalConfiguration.Configuration
+               .UseSqlServerStorage("AuthDb");
+            JobStorage.Current = new SqlServerStorage("AuthDb");
+
             app.UseHangfireDashboard("/job-dashboard", new DashboardOptions
             {
                 Authorization = new[] { new MyAuthorizationFilter() }
