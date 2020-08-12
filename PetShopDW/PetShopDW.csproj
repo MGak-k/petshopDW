@@ -346,6 +346,11 @@
     <Content Include="DX\layouts\Split\SplitLayout.html" />
     <Content Include="DX\layouts\Split\SplitLayout.js" />
     <Content Include="favicon.ico" />
+    <Content Include="filedump\product\0cb214c6-8cea-442a-8369-7f9228a86571.png" />
+    <Content Include="filedump\product\89194D13-A9C7-460B-8468-8450B72D92D3.png" />
+    <Content Include="filedump\product\D67D9DBF-1577-4783-B8D0-2C5680115BE5.png" />
+    <Content Include="filedump\product\F8173778-38B5-4BD2-980A-240E11677EEC.png" />
+    <Content Include="filedump\product\{0cb214c6-8cea-442a-8369-7f9228a86571}.png" />
     <Content Include="filedump\users\141907e6-c97e-4cd0-8886-903bb44d784e.png" />
     <Content Include="filedump\users\141907e6-c97e-4cd0-8886-903bb44d784e_thumbnail.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -661,7 +666,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="filedump\product\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
