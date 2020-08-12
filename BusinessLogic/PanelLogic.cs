@@ -79,6 +79,23 @@ namespace BusinessLogic
 
             };
         }
+
+        public BusinessObjects.UserDropdowns GetCategoryDropdowns()
+        {
+
+            return new BusinessObjects.UserDropdowns()
+            {
+
+                Users = (from t in DB.Categories
+                         orderby t.CategoryName
+                         select new BusinessObjects.GenericDropdown()
+                         {
+                             id = t.CategoryID,
+                             text = t.CategoryName
+                         }).ToList(),
+
+            };
+        }
         public List<DAL.UserGroup> GetAllGroups()
         {
             return DB.UserGroups.Where(x => x.Active).ToList();
@@ -520,26 +537,27 @@ namespace BusinessLogic
 
             return data;
         }
-        public void CreateProduct(DAL.Product postData)
+        public Guid CreateProduct(BusinessObjects.Product product)
         {
-            var product = new DAL.Product();
-            if (product != null)
+            var productNew = new DAL.Product();
+            if (productNew != null)
             {
-                product.ProductID = Guid.NewGuid();
-                product.ProductName = postData.ProductName;
-                product.CategoryID = postData.CategoryID;
-                product.Description = postData.Description;
-                product.CreatedDate = postData.CreatedDate;
-                product.Image = postData.Image;
-                product.Price = postData.Price;
-                product.ProductCount = postData.ProductCount;
-                product.UpdatedDate = postData.UpdatedDate;
-                product.IsActive = postData.IsActive;
-                product.IsDeleted = postData.IsDeleted;
+                productNew.ProductID = Guid.NewGuid();
+                productNew.ProductName = product.ProductName;
+                productNew.CategoryID = Guid.Parse("FB4D6D48-B5DC-449C-BC8B-C22EB3DDBA81");
+                productNew.Description = product.Description;
+                productNew.CreatedDate = DateTime.Now;
+                productNew.Image = "";
+                productNew.Price = product.Price;
+                productNew.ProductCount = product.ProductCount;
+                productNew.UpdatedDate = DateTime.Now;
+                productNew.IsActive = true;
+                productNew.IsDeleted = false;
 
-                DB.Products.Add(product);
+                DB.Products.Add(productNew);
                 DB.SaveChanges();
             }
+            return productNew.ProductID;
         }
 
         public void UpdateProduct(DAL.Product postData)

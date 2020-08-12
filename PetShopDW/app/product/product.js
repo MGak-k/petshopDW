@@ -4,7 +4,20 @@
     var selectedID;
     ajaxBlocking = false;
     var id;
+    var dropdowns = [];
 
+    var loadDropdowns = function () {
+        return $.ajax({
+            url:"/Product/GetDropdowns",
+            type: "GET",
+            success: function (data) {
+                dropdowns = data.data;
+                //Helpers.reinitS2Me(dropdowns);
+            },
+            error: function (data) {
+            }
+        });
+    };
 
     var rebindEvents = function () {
 
@@ -74,11 +87,22 @@
                 dataField: "ProductName",
                 caption: "Product",
                 dataType: 'string'
-            },
-            {
-                dataField: "CategoryID",
-                caption: "CategoryID"
-            },
+                },
+                {
+                    dataField: "CategoryID",
+                    caption: "Category",
+                    validationRules: [{ type: 'required' }],
+                    width: 125,
+                    lookup: {
+                        dataSource: dropdowns.Users,
+                        displayExpr: "text",
+                        valueExpr: "id"
+                    }
+                },
+            //{
+            //    dataField: "CategoryID",
+            //    caption: "CategoryID"
+            //},
             {
                 dataField: "Description",
                 caption: "Description"
@@ -92,11 +116,13 @@
                     caption: "Price"
                 },
                 {
-                    dataField: "CreatedDate"
+                    dataField: "CreatedDate",
+                    dataType:"date"
                 },
                 {
                     dataField: "UpdatedDate",
-                    caption: "Description"
+                    caption: "Updated Date",
+                    dataType:"date"
                 },
                 {
                     dataField: "IsActive",
@@ -114,7 +140,10 @@
 
         init: function () {
             $("[data-switch=true]").bootstrapSwitch();
-            initTable();
+            var a1 = loadDropdowns();
+            $.when(a1).done(function () {
+                initTable();
+            });
         }
     };
 }();

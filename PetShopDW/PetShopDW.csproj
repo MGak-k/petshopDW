@@ -217,6 +217,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\orders\orders.js" />
+    <Content Include="assets\bootstrap-fileinput.css" />
+    <Content Include="assets\bootstrap-fileinput.js" />
     <Content Include="assets\card-js.min.css" />
     <Content Include="assets\card-js.min.js" />
     <Content Include="app\category\category.js" />
@@ -232,6 +234,7 @@
     <Content Include="assets\ccv\images\visa.jpg" />
     <Content Include="assets\ccv\js\jquery.payform.min.js" />
     <Content Include="assets\ccv\js\script.js" />
+    <Content Include="assets\componenets.min.css" />
     <Content Include="assets\img\petshop.jpg" />
     <Content Include="assets\product\product.css" />
     <Content Include="Content\bootstrap-theme.css" />
