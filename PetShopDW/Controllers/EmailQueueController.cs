@@ -8,10 +8,10 @@ namespace PetShopDW.Controllers
 {
     public class EmailQueueController : BaseController
     {
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
         [HttpPost]
         public JsonResult Get(int skip, int take, string filter, string sort, bool showSent)
@@ -56,7 +56,7 @@ namespace PetShopDW.Controllers
                 var Files = new List<BusinessLogic.BusinessObjects.Email.EmailAttachment>();
                 BusinessLogic.Helpers.Messaging.GetAttachmentsForMail(out Files, Path, FileId);
                 eh.Attachemnts = Files;
-            
+
                 try
                 {
                     eh.Send();
@@ -104,4 +104,5 @@ namespace PetShopDW.Controllers
 
         }
 
+    }
 }

@@ -80,7 +80,21 @@ namespace PetShopDW.Controllers
             try
             {
                 var orderItems = (List<BusinessLogic.BusinessObjects.CartItems>)Session["cart"];
-                BLL.AddPayment(postData,orderItems);
+                var orderID = BLL.AddPayment(postData,orderItems);
+                var stringOrder = orderID.ToString();
+                var message = BLL.GetMessage("new-order");
+
+                var settings = BLL.GetSettings();
+                var Recipient = "milos.gak@axelyos.com";
+
+                Dictionary<string, string> dictionaryTerms = new Dictionary<string, string>();
+                dictionaryTerms.Add("[Name]", "Milos Gak");
+                dictionaryTerms.Add("[OrderNumber]", stringOrder);
+
+                var Subject = Helpers.EmailTranslator.Translate(message.Subject, dictionaryTerms);
+                var Body = Helpers.EmailTranslator.Translate(message.Layout, dictionaryTerms);
+
+                BLL.AddEmailToQueue(settings.FirstOrDefault(x => x.Active && x.Element == "sender-email")?.Value ?? "", Recipient, Body, Subject, 0, null);
                 return Json(new { success = true });
             }
             catch (Exception ex)

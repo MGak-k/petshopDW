@@ -257,7 +257,6 @@ namespace BusinessLogic
             if (Recipient != "")
             {
                 CCs = CCs ?? new List<string>();
-                CCs.Add(DB.Settings.Where(z => z.Element == "heather-mail").FirstOrDefault().Value);
                 string strCC = null;
                 if (CCs.Count() > 0)
                     strCC = string.Join(",", CCs.ToArray());
@@ -586,7 +585,7 @@ namespace BusinessLogic
 
         #region Payment
 
-        public void AddPayment(BusinessObjects.PaymentConfirm postData, List<BusinessLogic.BusinessObjects.CartItems> cartItems)
+        public Guid AddPayment(BusinessObjects.PaymentConfirm postData, List<BusinessLogic.BusinessObjects.CartItems> cartItems)
         {
             var payment = new DAL.DeliveryDetail();
             if (payment != null)
@@ -614,7 +613,7 @@ namespace BusinessLogic
                 DB.PaymentItems.Add(item);
                 DB.SaveChanges();
             }
-
+            return payment.OrderID.Value;
         }
         #endregion
 
@@ -702,6 +701,13 @@ namespace BusinessLogic
                 e.Sent = email.Sent;
                 DB.SaveChanges();
             }
+        }
+
+
+        public List<BusinessLogic.DAL.EmailQueue> GetEmailsForSending()
+        {
+            var emails = DB.EmailQueues.Where(x => x.Sent == false).AsEnumerable().ToList();
+            return emails;
         }
 
         #endregion

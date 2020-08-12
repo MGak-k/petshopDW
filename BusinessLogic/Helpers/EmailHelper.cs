@@ -28,8 +28,7 @@ namespace BusinessLogic.Helpers
 
         public EmailHelper(Guid? CompanyID = null)
         {
-
-
+            
 
             using (PanelLogic bll = new PanelLogic())
             {
