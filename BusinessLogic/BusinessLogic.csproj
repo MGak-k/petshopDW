@@ -79,7 +79,9 @@
     <Compile Include="BusinessObjects\CartItems.cs" />
     <Compile Include="BusinessObjects\Category.cs" />
     <Compile Include="BusinessObjects\DeliveryDetails.cs" />
+    <Compile Include="BusinessObjects\Email\Email.cs" />
     <Compile Include="BusinessObjects\Email\EmailAttachment.cs" />
+    <Compile Include="BusinessObjects\Email\Extensions.cs" />
     <Compile Include="BusinessObjects\Generic.cs" />
     <Compile Include="BusinessObjects\GenericDropdown.cs" />
     <Compile Include="BusinessObjects\ListWrapper.cs" />
@@ -157,11 +159,13 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DynamicQueryable.cs" />
+    <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\EmailTranslator.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\FilterField.cs" />
     <Compile Include="Helpers\FilterToUTCAttributeAttribute.cs" />
     <Compile Include="Helpers\Logger.cs" />
+    <Compile Include="Helpers\Messaging.cs" />
     <Compile Include="Helpers\QueryingHelper.cs" />
     <Compile Include="PanelLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -9,12 +9,12 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
 <div class="container">
     <h3 class="h3">PET SHOP STORE</h3>
-    <form method="get" action="@Url.Action("Index", "Home")">
-        <label for="search">Search</label>
+    <form method="get" action="@Url.Action("Index", "Home")" style="text-align:center;margin-bottom:15px;">
         <input type="text" name="search" id="search" />
-        <button type="submit">Perform search</button>
+        <button type="submit">Search</button>
     </form>
     <div class="row">
 
@@ -22,7 +22,7 @@
         {
             foreach (var item in Model)
             {
-
+                var price = (item.Price.Value * (decimal)1.1);
                 <div class="col-md-3 col-sm-6">
 
                     <div class="product-grid4">
@@ -43,12 +43,12 @@
                         <div class="product-content">
                             <h2 class="title">
                                 @item.ProductName
-                                
+
                             </h2>
                             <h3>@item.Description</h3>
                             <div class="price">
                                 @item.Price;
-                                <span>$16.00</span>
+                                <span>$ @price</span>
                             </div>
                             <a class="add-to-cart" href="/Payment/AddToCart?ProductID=@item.ProductID">ADD TO CART</a>
                         </div>

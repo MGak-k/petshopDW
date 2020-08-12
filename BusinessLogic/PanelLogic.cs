@@ -641,6 +641,71 @@ namespace BusinessLogic
 
         #endregion
 
+        #region EmailQueue
+
+        public BusinessObjects.ListWrapper GetEmailsInQueue(Dictionary<string, object> options, string name, bool showSent)
+        {
+            var data = DB.EmailQueues
+                  .AsNoTracking()
+                  .OrderByDescending(x => x.TimeStamp)
+                  .AsQueryable();
+
+
+            if (showSent == true)
+                data = data.Where(x => x.Sent).AsQueryable();
+            else
+            {
+                data = data.Where(x => !x.Sent).AsQueryable();
+            }
+            var querying = QueryingHelper<DAL.EmailQueue>.Filter(data, options, typeof(BusinessObjects.Email.Email));
+            data = querying.Results;
+
+            var emailsViewModel = data
+                         .AsEnumerable()
+                         .Select(x => new BusinessObjects.Email.Email()
+                         {
+                             ID = x.ID,
+                             TimeStamp = string.Format("{0:dd/MM/yyyy HH:mm:ss}", x.TimeStamp),
+                             SenderEmail = x.SenderEmail,
+                             RecipientEmail = x.RecipientEmail,
+                             EmailContent = x.EmailContent,
+                             Sent = x.Sent,
+                             LastAttempt = string.Format("{0:dd/MM/yyyy HH:mm:ss}", x.LastAttempt),
+                             NoOfRetries = x.NoOfRetries,
+                             LastError = x.LastError,
+                             Subject = x.Subject,
+                             Cc = x.CC
+                         })
+                         .AsQueryable();
+
+            return new BusinessLogic.BusinessObjects.ListWrapper()
+            {
+                data = emailsViewModel,
+                totalCount = querying.TotalCount
+            };
+
+        }
+
+        public DAL.EmailQueue GetEmailFromQueue(Guid ID)
+        {
+            return DB.EmailQueues.FirstOrDefault(x => x.ID == ID);
+        }
+
+        public void UpdateEmailInQueue(DAL.EmailQueue email)
+        {
+            var e = DB.EmailQueues.FirstOrDefault(x => x.ID == email.ID);
+            if (e != null)
+            {
+                e.LastAttempt = email.LastAttempt;
+                e.LastError = email.LastError;
+                e.NoOfRetries = email.NoOfRetries;
+                e.Sent = email.Sent;
+                DB.SaveChanges();
+            }
+        }
+
+        #endregion
+
 
 
     }
